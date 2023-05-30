@@ -9,34 +9,34 @@ import { register } from "../actions/userActions";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function RegisterScreen() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [message, setMessage] = useState("")
 
   const dispatch = useDispatch();
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { error, loading, userInfo } = userRegister;
+  const userRegister = useSelector((state) => state.userRegister)
+  const { error, loading, userInfo } = userRegister
 
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const redirect = queryParams.get("redirect") ?? "/";
+  const queryParams = new URLSearchParams(location.search)
+  const redirect = queryParams.get("redirect") ?? "/"
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      navigate(redirect)
     }
-  }, [userInfo, redirect, navigate]);
+  }, [userInfo, redirect, navigate])
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) {
-      setMessage("Hasła nie są takie same");
+    if (password !== confirmPassword) {
+      setMessage("Hasła różnią się od siebie.");
     } else {
       dispatch(register(name, email, password));
     }
@@ -44,7 +44,6 @@ function RegisterScreen() {
 
   return (
     <Container fluid className="p-3 my-5 h-custom">
-      {loading && <Loader />}
       <Row>
         <Col col="10" md="6">
           <img
@@ -74,11 +73,11 @@ function RegisterScreen() {
                 transform: "translate(-50%, -50%)",
               }}
             >
-              Zarejestruj się
+              Rejestracja
             </p>
           </div>
           {message && <Message variant="danger">{message}</Message>}
-          {error && <Message variant="danger">{error}</Message>}
+          
           {loading && <Loader />}
           <Form onSubmit={submitHandler}>
             <Form.Group className="mb-4" controlId="name">

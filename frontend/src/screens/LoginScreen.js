@@ -21,7 +21,7 @@ function LoginScreen() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const redirect = queryParams.get("redirect") ?? "/";
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function LoginScreen() {
         <Col col="4" md="6">
         <div className="login-info mb-4" style={{ backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '5px', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', minHeight: '100px', position: 'relative' }}>
           <p style={{ fontSize: '28px', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-            Zaloguj się
+            Logowanie
           </p>
         </div>
 
