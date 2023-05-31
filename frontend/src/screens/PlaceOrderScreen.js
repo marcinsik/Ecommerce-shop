@@ -3,93 +3,79 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
-import Loader from "../components/Loader";
 import CheckoutSteps from "../components/CheckoutSteps";
-import { getOrderDetails } from "../actions/orderActions";
+import { createOrder } from "../actions/orderActions";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
-function OrderScreen() {
+function PlaceOrderScreen() {
   const navigate = useNavigate();
-  const { id: orderId } = useParams();
 
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const { order, error, loading } = orderDetails;
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, error, success } = orderCreate;
 
   const dispatch = useDispatch();
 
-  if (!loading && !error) {
-    order.itemsPrice = order.orderItems
-      .reduce((acc, item) => acc + item.price * item.qty, 0)
-      .toFixed(2);
-  }
+  const cart = useSelector((state) => state.cart);
+  cart.itemsPrice = cart.cartItems.reduce((acc, items) => acc + items.price * items.qty, 0).toFixed(2);
+  cart.shippingPrice = (cart.itemsPrice > 200 ? 0 : 10).toFixed(2);
+  cart.totalPrice = ( Number(cart.itemsPrice) + Number(cart.shippingPrice)).toFixed(2);
 
   useEffect(() => {
-    if (!order || order._id !== Number(orderId)) {
-      dispatch(getOrderDetails(orderId));
+    if (success) {
+        navigate(`/order/${order._id}`)
+        dispatch({ type: ORDER_CREATE_RESET })
     }
-  }, [order, orderId]);
+  }, [success])
 
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant="danger">{error}</Message>
-  ) : (
+  const placeOrder = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
+
+  if (!cart.paymentMethod) {
+    navigate('/payment')
+}
+
+  return (
     <div>
       <h2 className="mb-5 text-center">Twoje zamówienie</h2>
+      <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item className="">
-              <h2 style={{ marginBottom: "1rem" }}>Informacje</h2>
-              <p
-                style={{
-                  fontSize: "1.2rem",
-                  color: "#333",
-                  marginTop: "1rem",
-                  fontWeight: "1000",
-                }}
-              >
-                Potwierdzenie złożenia zamówienia zostało wysłane na twój adres
-                e-mail: <span></span>
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
-              </p>
-            </ListGroup.Item>
-
-            <ListGroup.Item className="">
               <h2 style={{ marginBottom: "1rem" }}>Dostawa</h2>
               <p>
-                {order.shippingAddress.address}, {order.shippingAddress.city}
+                {cart.shippingAddress.address}, {cart.shippingAddress.city}
                 {"  "}
-                {order.shippingAddress.postalCode},{"  "}
-                {order.shippingAddress.country}
+                {cart.shippingAddress.postalCode},{"  "}
+                {cart.shippingAddress.country}
               </p>
-              {order.isDelivered ? (
-                <Message variant="success">
-                  Dostarczone {order.deliveredAt}
-                </Message>
-              ) : (
-                <Message variant="danger">Niedostarczone</Message>
-              )}
             </ListGroup.Item>
 
             <ListGroup.Item className="mt-3">
               <h2 style={{ marginBottom: "1rem" }}>Metoda płatności</h2>
-              <p>{order.paymentMethod}</p>
-              {order.isPaid ? (
-                <Message variant="success">Opłacone: {order.paidAt}</Message>
-              ) : (
-                <Message variant="danger">Nieopłacone</Message>
-              )}
+              <p>
+                {cart.paymentMethod}
+              </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2 style={{ marginTop: "1rem" }}>Produkty</h2>
-              {order.orderItems.length === 0 ? (
-                <Message variant="info">Puste zamówienie</Message>
+              {cart.cartItems.length === 0 ? (
+                <Message variant="info">Twój koszyk jest pusty.</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {order.orderItems.map((item, index) => (
+                  {cart.cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={2} className="order-item-image">
@@ -132,41 +118,37 @@ function OrderScreen() {
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Nr. zamówienia</Col>
-                  <Col>{orderId}</Col>
-                </Row>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Row>
                   <Col>Wartość</Col>
-                  <Col>{order.itemsPrice} ZŁ</Col>
+                  <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Dostawa</Col>
-                  <Col>{order.shippingPrice} ZŁ</Col>
+                  <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
-                  <Col style={{ fontWeight: "1000" }}>Razem:</Col>
-                  <Col style={{ fontWeight: "1000" }}>
-                    {order.totalPrice} ZŁ
-                  </Col>
+                  <Col style={{ fontWeight: '1000' }}>Razem:</Col>
+                  <Col style={{ fontWeight: '1000' }}>{cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                {error && <Message variant = 'danger'>Aby złożyć zamówienie musisz być zalogowany.</Message>}
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button
                   type="button"
                   className="btn-block w-100"
-                  style={{ backgroundColor: "green", color: "white" }}
+                  disabled={cart.cartItems === 0}
+                  onClick={placeOrder}
                 >
-                  ZAMÓWIENIE ZŁOŻONE
+                  Złoż zamówienie
                 </Button>
               </ListGroup.Item>
             </ListGroup>
@@ -177,4 +159,4 @@ function OrderScreen() {
   );
 }
 
-export default OrderScreen;
+export default PlaceOrderScreen;

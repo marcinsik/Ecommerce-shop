@@ -1,6 +1,6 @@
-*{
+/* *{
   outline: red dashed 1px;
-}
+} */
 main{
   min-height: 100vh;
   flex-grow: 1;

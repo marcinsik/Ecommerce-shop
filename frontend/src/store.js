@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from  'redux-thunk'
 import { composeWithDevTools } from'redux-devtools-extension'
 import  { productListReducers } from './reducers/productReducers'
 import  { productDetailsReducers } from './reducers/productReducers'
 import { cartReducers } from './reducers/cartReducers'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer} from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer,} from './reducers/userReducers'
+import { orderCreateReducer, orderDetailsReducer } from './reducers/orderReducers'
 
 const reducer = combineReducers({
     productList: productListReducers,
@@ -13,12 +15,14 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
-    userUpdateProfile: userUpdateProfileReducer
+    userUpdateProfile: userUpdateProfileReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
 })
 
 
-const cardItemsFromStorage = localStorage.getItem('cardItems')
-    ? JSON.parse(localStorage.getItem('cardItems')) 
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+    ? JSON.parse(localStorage.getItem('cartItems')) 
     : []
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -30,13 +34,21 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
     : []
 
 const initialState = {
-    cart: { cartItems: cardItemsFromStorage,
-            shippingAddress: shippingAddressFromStorage },
+    cart: {
+        cartItems: cartItemsFromStorage,
+        shippingAddress: shippingAddressFromStorage,
+    },
     userLogin: { userInfo: userInfoFromStorage },
 }
 
 const middleware = [thunk]
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+// const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = configureStore({
+    reducer,
+    preloadedState: initialState,
+    middleware: (getDefaultMiddleware) => [...middleware],
+    devTools: process.env.NODE_ENV !== 'production',
+  });
 
 export default store
