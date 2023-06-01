@@ -44,10 +44,10 @@ const checkoutHandler = () => {
   return (
 <Row>
     <Col md={8}>
-        <h1>Shopping Cart</h1>
+        <h1>Koszyk</h1>
         {cartItems.length === 0 ? (
             <div>
-                Your cart is empty <Link to='/'>Go Back</Link>
+                Twój koszyk jest pusty. <Link to='/'>Wróć</Link>
             </div>
         ) : (
                 <ListGroup variant='flush'>
@@ -98,19 +98,19 @@ const checkoutHandler = () => {
         <Card>
             <ListGroup variant='flush'>
                 <ListGroup.Item>
-                    <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
-                    ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
+                    <h2>Razem ({cartItems.reduce((acc, item) => acc + item.qty, 0)})</h2>
+                    {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)} ZŁ
                 </ListGroup.Item>
             </ListGroup>
 
             <ListGroup.Item>
                 <Button
                     type='button'
-                    className='btn-block'
+                    className='btn-block w-100'
                     disabled={cartItems.length === 0}
                     onClick={checkoutHandler}
                 >
-                    Proceed To Checkout
+                    Przejdz do płatności
                 </Button>
             </ListGroup.Item>
 

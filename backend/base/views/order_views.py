@@ -10,7 +10,7 @@ from base.serializers import ProductSerializer, OrderSerializer
 from rest_framework import status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+import datetime
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -83,4 +83,25 @@ def getOrderById(request, pk):
     except:
         return Response({'detail': "Order does not exist"}, status = status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getMyOrders(request):
+    user = request.user
+    orders = user.order_set.all()
+    serializer = OrderSerializer(orders, many = True)
+    
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updaterOrderPaid(request,pk):
+    order = Order.objects.get(_id = pk)
+    
+    order.isPaid = True
+    order.paidAt = datetime.now()
+    order.save()
+    
+    return Response('Oplacone')
         

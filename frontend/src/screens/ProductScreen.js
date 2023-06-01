@@ -119,7 +119,7 @@ function ProductScreen({ match }) {
                         </ListGroup.Item>
                     )}
                   <ListGroup.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                      <Button className='btn-block' disabled={product.countInStock == 0} type='button' onClick={addToCartHandler}>
+                      <Button className='btn-block' disabled={product.countInStock <= 0} type='button' onClick={addToCartHandler}>
                           Dodaj do koszyka
                       </Button>
                   </ListGroup.Item>

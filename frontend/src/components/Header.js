@@ -46,11 +46,11 @@ function Header() {
               {userInfo ? (
                 <NavDropdown title="Twoje konto" id="username">
                   <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item>Profil</NavDropdown.Item>
                   </LinkContainer>
 
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
+                    Wyloguj się
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
