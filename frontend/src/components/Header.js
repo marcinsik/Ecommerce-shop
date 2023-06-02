@@ -14,6 +14,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
+import { useEffect, useState } from 'react';
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -25,6 +26,30 @@ function Header() {
     dispatch(logout());
   };
 
+
+  const [subcategories, setSubcategories] = useState([]);
+  const [subsubcategories, setSubsubcategories] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/subcategories/')
+      .then(response => response.json())
+      .then(data => setSubcategories(data))
+      .catch(error => console.log(error));
+    
+    fetch('/api/subsubcategories/')
+      .then(response => response.json())
+      .then(data => setSubsubcategories(data))
+      .catch(error => console.log(error));
+  }, []);
+
+  const findSubSubcategories = (subcategory) => {
+    if (subsubcategories.length > 0) {
+      return subsubcategories.filter(subsubcategory => subsubcategory.parent_subcategory === subcategory.id);
+    }
+    return [];
+  };
+  
+
   return (
     <header>
       <Navbar bg="light" variant="light" expand="sm" collapseOnSelect>
@@ -32,11 +57,11 @@ function Header() {
           <LinkContainer to="/">
             <Navbar.Brand className="myshop">MyShop</Navbar.Brand>
           </LinkContainer>
-          <Form className="d-flex">
+          <Form className="my-form">
             <Form.Control
               type="search"
               placeholder="Czego szukasz?"
-              className="me-2"
+              className="search-form"
               aria-label="Search"
             />
             <Button variant="dark">Wyszukaj</Button>
@@ -82,18 +107,35 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="test">
-              <NavDropdown title="Laptopy i komputery">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
-                <NavDropdown.Item>Something else here</NavDropdown.Item>
+              
+            <NavDropdown title="Laptopy i Komputery">
+                {subcategories
+                  .filter((subcategory) => subcategory.parent_category === 2)
+                  .map((subcategory) => (
+                    <NavDropdown title={subcategory.name} key={subcategory.id}>
+                      {findSubSubcategories(subcategory).map((subsubcategory) => (
+                        <NavDropdown.Item key={subsubcategory.id}>
+                          {subsubcategory.name}
+                        </NavDropdown.Item>
+                      ))}
+                    </NavDropdown>
+                  ))}
               </NavDropdown>
-
-              <NavDropdown title="Podzespoły komputerowe">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
-                <NavDropdown.Item>Something else here</NavDropdown.Item>
+                        
+              <NavDropdown title="Podzespoły komputerowe" className="categories-dropdown dropright">
+                {subcategories
+                  .filter((subcategory) => subcategory.parent_category === 1)
+                  .map((subcategory) => (
+                    <NavDropdown title={subcategory.name} key={subcategory.id}>
+                      {findSubSubcategories(subcategory).map((subsubcategory) => (
+                        <NavDropdown.Item key={subsubcategory.id}>
+                          {subsubcategory.name}
+                        </NavDropdown.Item>
+                      ))}
+                    </NavDropdown>
+                  ))}
               </NavDropdown>
-
+                        
               <NavDropdown title="Gaming">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>Another action</NavDropdown.Item>
@@ -117,11 +159,7 @@ function Header() {
                 <NavDropdown.Item>Another action</NavDropdown.Item>
                 <NavDropdown.Item>Something else here</NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Akcesoria">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
-                <NavDropdown.Item>Something else here</NavDropdown.Item>
-              </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>

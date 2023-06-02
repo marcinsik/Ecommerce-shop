@@ -39,6 +39,24 @@ h3{
   color: rgb(99, 98, 98);
 }
 
+/* search form */
+.my-form {
+  /* Add your desired styles for the form container */
+  display: flex;
+  align-items: center;
+  /* ... other styles */
+}
+
+.my-form .search-form {
+  /* Add your desired styles for the search input */
+  flex-grow: 1;
+  margin-right: 10px;
+  /* ... other styles */
+}
+
+.my-form .btn {
+  margin-top: -15px;
+}
 
 
 /* kategorie */
@@ -59,6 +77,11 @@ h3{
 
 .account .nav-link {
   color: dark;
+}
+
+.categories-dropdown {
+  color: black;
+  
 }
 
 /* profil użytkownika */

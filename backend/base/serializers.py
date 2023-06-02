@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User 
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Product, Order, OrderItem, ShippingAddress
+from .models import Category, Subcategory, SubSubcategory,  Product, Order, OrderItem, ShippingAddress
 
 
 
@@ -39,7 +39,26 @@ class UserSerializerWithToken(UserSerializer):
 
         return str(token.access_token)
     
+class SubSubcategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubSubcategory
+        fields = '__all__'
 
+class SubcategorySerializer(serializers.ModelSerializer):
+    subsubcategories = SubSubcategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Subcategory
+        fields = '__all__'
+
+class CategorySerializer(serializers.ModelSerializer):
+    subcategories = SubcategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+        
+        
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
