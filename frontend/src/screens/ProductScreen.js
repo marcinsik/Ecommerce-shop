@@ -9,6 +9,7 @@ import { Nav, Navbar, Container} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { listProductsDetails } from "../actions/productActions";
 import { useDispatch, useSelector } from'react-redux'
+import { useHistory } from "react-router-dom";
 
 function ProductScreen({ match }) {
   const {id} = useParams();
@@ -49,10 +50,19 @@ function ProductScreen({ match }) {
     });
   };
 
+// previous page
+const handleGoBack = () => {
+  window.history.back();
+};
+
 
   return (
     <div>
-      <Link to="/" className="btn btn-dark my-4">Powrót</Link>
+      <div className="back-button">
+      <button className="btn btn-dark mb-" onClick={handleGoBack}>
+        Powrót
+      </button>
+    </div>
 
       {loading?
       <Loader />

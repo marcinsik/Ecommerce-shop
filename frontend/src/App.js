@@ -13,6 +13,9 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import SSD from './screens/ProductsScreens/SSD'
+import HDD from './screens/ProductsScreens/HDD'
 
 function App() {
   return (
@@ -25,7 +28,15 @@ function App() {
             <Route path='/login' element={<LoginScreen/>} />
             <Route path='/register' element={<RegisterScreen/>} />
             <Route path='/profile' element={<ProfileScreen />} />
+
             <Route path='/product/:id' element={<ProductScreen />} />
+            <Route path='/products' element={<ProductListScreen />} />
+            <Route path='/products/ssd' element={<SSD />} />
+            <Route path='/products/hdd' element={<HDD />} />
+
+
+
+
             <Route path='/cart/:id?' element={<CartScreen />} />
             <Route path='/shipping' element={<ShippingScreen/>} />
             <Route path='/payment' element={<PaymentScreen/>} />

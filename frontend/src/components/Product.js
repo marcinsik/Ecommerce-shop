@@ -14,7 +14,7 @@ function Product({ product }) {
         <Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}>
           <Card.Title className="product-name">{product.name}</Card.Title>
         </Link>
-        <Card.Text className="product-price">${product.price}</Card.Text>
+        <Card.Text className="product-price">{product.price} PLN</Card.Text>
       </Card.Body>
     </Card>
   );

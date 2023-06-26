@@ -23,7 +23,8 @@ function HomeScreen() {
   return (
     <div>
       <ProductCarousel />
-        <h1> Najnowsze produkty</h1>
+      <h1 style={{ marginTop: '40px' }}>Najnowsze produkty</h1>
+
         {loading ? <Loader/>
         : error ? <Message variant='danger'>{error}</Message>
           :
