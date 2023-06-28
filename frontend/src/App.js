@@ -16,6 +16,7 @@ import OrderScreen from './screens/OrderScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import SSD from './screens/ProductsScreens/SSD'
 import HDD from './screens/ProductsScreens/HDD'
+import GraphicCards from './screens/ProductsScreens/GraphicCards'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='/products' element={<ProductListScreen />} />
             <Route path='/products/ssd' element={<SSD />} />
             <Route path='/products/hdd' element={<HDD />} />
+            <Route path='/products/graphic-cards' element={<GraphicCards />} />
 
 
 

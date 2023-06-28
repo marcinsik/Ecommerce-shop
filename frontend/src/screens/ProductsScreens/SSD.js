@@ -6,6 +6,8 @@ import Message from "../../components/Message";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../../actions/productActions";
+import { Card } from "react-bootstrap";
+
 
 function SSD() {
   const [brandNames, setBrandNames] = useState([]);
@@ -18,6 +20,7 @@ function SSD() {
 
   const [filteredBrand, setFilteredBrand] = useState("Wszystkie");
   const [filteredProducts, setFilteredProducts] = useState([]);
+
 
   useEffect(() => {
     dispatch(listProducts());
@@ -71,38 +74,41 @@ function SSD() {
   return (
     <Row>
       <Col>
-
-        <div className="filter-menu">
-          <h2>Producent</h2>
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : (
+        <Card className="p-3 rounded product-card-filter">
+          <div className="filter-menu">
+            <h2>Producent</h2>
+            {loading ? (
+              <Loader />
+            ) : error ? (
+              <Message variant="danger">{error}</Message>
+            ) : (
+              <ul>
+                {brandNames.map((brandName) => (
+                  <li
+                    key={brandName}
+                    onClick={() => handleBrandClick(brandName)}
+                    className={filteredBrand === brandName ? "selected" : ""}
+                  >
+                    {brandName}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <h2>Zakres cenowy</h2>
             <ul>
-              {brandNames.map((brandName) => (
-                <li
-                  key={brandName}
-                  onClick={() => handleBrandClick(brandName)}
-                  className={filteredBrand === brandName ? "selected" : ""}
-                >
-                  {brandName}
-                </li>
-              ))}
+              <li>TODO</li>
+              <li>TODO</li>
+              <li>TODO</li>
             </ul>
-          )}
-          <h2>Price Range</h2>
-          <ul>
-            <li>TODO</li>
-            <li>TODO</li>
-            <li>TODO</li>
-            {/* Add more price range options as needed */}
-          </ul>
-        </div>
+          </div>
+        </Card>
       </Col>
+
       <Col md={8}>
         <div className="product-list">
-          <h1 style={{ marginTop: "0px" }}>Dyski SSD</h1>
+          <Card className="category-name">
+            <h1> Dyski SDD </h1>
+          </Card>
           {loading ? (
             <Loader />
           ) : error ? (

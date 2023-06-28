@@ -121,22 +121,17 @@ function Header() {
               </NavDropdown>
 
               <NavDropdown title="Podzespoły Komputerowe">
-                <NavDropdown title="DYSKI HDD i SSD">
+                <NavDropdown title="  Dyski HHD i SSD">
                   <LinkContainer to="/products/ssd">
                     <NavDropdown.Item>SSD</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/products/hdd">
                     <NavDropdown.Item>HDD</NavDropdown.Item>
                   </LinkContainer>
-                </NavDropdown>
-                <NavDropdown title="Karty graficzne">
-                  <LinkContainer to="/products/nvidia-cards">
-                    <NavDropdown.Item>Karty NVIDIA</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/products/amd-cards">
-                    <NavDropdown.Item>Karty AMD</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
+                </NavDropdown>    
+                <LinkContainer to="/products/graphic-cards">
+                    <Nav.Link>Karty graficzne</Nav.Link>
+                </LinkContainer>        
               </NavDropdown>
 
               <NavDropdown title="GAMING">

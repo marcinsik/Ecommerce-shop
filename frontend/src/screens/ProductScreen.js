@@ -71,7 +71,7 @@ const handleGoBack = () => {
       :(
         <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name} fluid />
+          <Image src={product.image} alt={product.name} fluid style={{ width: "600px", maxHeight: "350px" }} />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
