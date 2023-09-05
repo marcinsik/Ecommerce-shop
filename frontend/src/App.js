@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -17,6 +17,11 @@ import ProductListScreen from './screens/ProductListScreen'
 import SSD from './screens/ProductsScreens/SSD'
 import HDD from './screens/ProductsScreens/HDD'
 import GraphicCards from './screens/ProductsScreens/GraphicCards'
+import UserListScreen from './screens/UserListScreen'
+import AdminScreen from './screens/AdminScreen'
+import NotFound from './screens/NotFound'
+import UserEditScreen from './screens/UserEditScreen'
+import AdminProductListScreen from './screens/AdminProductListScreen'
 
 function App() {
   return (
@@ -44,7 +49,18 @@ function App() {
             <Route path='/payment' element={<PaymentScreen/>} />
             <Route path='/placeorder' element={<PlaceOrderScreen/>} />
             <Route path='/order/:id' element={<OrderScreen/>} />
+
+            <Route path='/admin' element={<AdminScreen/>} />
+            <Route path='/admin/userslist' element={<UserListScreen/>} />
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
+
+            <Route path='/admin/productslist' element={<AdminProductListScreen/>} />
+
+            <Route path="*" element={<NotFound />} />
+            
           </Routes>
+
+
         </Container>
       </main>
       <Footer />

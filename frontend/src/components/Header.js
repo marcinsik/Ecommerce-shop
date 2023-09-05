@@ -9,7 +9,7 @@ import {
   Col,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,6 +50,13 @@ function Header() {
     }
     return [];
   };
+
+  const location = useLocation()
+  const isUserListRoute = location.pathname.startsWith('/admin/userslist') || location.pathname === '/admin' || location.pathname === '/admin/productslist';
+  if (isUserListRoute) {
+    return null;
+  }
+
 
   return (
     <header>
