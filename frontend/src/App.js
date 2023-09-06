@@ -22,6 +22,8 @@ import AdminScreen from './screens/AdminScreen'
 import NotFound from './screens/NotFound'
 import UserEditScreen from './screens/UserEditScreen'
 import AdminProductListScreen from './screens/AdminProductListScreen'
+import AdminProductEditScreen from './screens/AdminProductEditScreen'
+import AdminOrderListScreen from './screens/AdminOrderListScreen'
 
 function App() {
   return (
@@ -41,20 +43,21 @@ function App() {
             <Route path='/products/hdd' element={<HDD />} />
             <Route path='/products/graphic-cards' element={<GraphicCards />} />
 
-
-
-
             <Route path='/cart/:id?' element={<CartScreen />} />
             <Route path='/shipping' element={<ShippingScreen/>} />
             <Route path='/payment' element={<PaymentScreen/>} />
             <Route path='/placeorder' element={<PlaceOrderScreen/>} />
             <Route path='/order/:id' element={<OrderScreen/>} />
 
+
             <Route path='/admin' element={<AdminScreen/>} />
             <Route path='/admin/userslist' element={<UserListScreen/>} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
 
             <Route path='/admin/productslist' element={<AdminProductListScreen/>} />
+            <Route path='/admin/product/:id/edit' element={<AdminProductEditScreen />} />
+
+            <Route path='/admin/orderlist' element={<AdminOrderListScreen/>} />
 
             <Route path="*" element={<NotFound />} />
             

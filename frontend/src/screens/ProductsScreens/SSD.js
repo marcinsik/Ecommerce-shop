@@ -118,7 +118,7 @@ function SSD() {
           ) : (
             <Row>
               {filteredProducts.map((product) => (
-                <Col className="products-lists-page" key={product._id} sm={12} md={4} lg={2} xl={6}>
+                <Col className="products-lists-page" key={product._id} sm={4} md={4} lg={6} xl={4}>
                   <Product product={product} />
                 </Col>
               ))}

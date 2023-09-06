@@ -34,7 +34,15 @@ const AdminScreen = () => {
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="sm" collapseOnSelect>
-                <Container>
+                <Container>  
+                    <Col col="2" md="2">
+                    <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                        className="img-fluid"
+                        alt="Sample image"
+                        style={{ marginLeft: "90px" }} 
+                    />
+                    </Col>
                     <LinkContainer to="/admin">
                         <Navbar.Brand className="myshop">MyShop ADMIN PANEL</Navbar.Brand>
                     </LinkContainer>
@@ -76,7 +84,7 @@ const AdminScreen = () => {
                         </Navbar>
                     </LinkContainer>
 
-                    <LinkContainer to="/admin/orders">
+                    <LinkContainer to="/admin/orderlist">
                         <Navbar className="admin-panel-orders-list" style={{ color: 'green', border: '1px solid white' }}> Zamówienia
                         </Navbar>
                     </LinkContainer>

@@ -30,7 +30,7 @@ class Product(models.Model):
     subCategory = models.ForeignKey(Subcategory, null=True, blank=True, on_delete=models.CASCADE)
     subSubCategory = models.ForeignKey(SubSubcategory, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, default='/sample.jpg')
     brand = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)

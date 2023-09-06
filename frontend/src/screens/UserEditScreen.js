@@ -8,6 +8,7 @@ import FormContainer from '../components/FormContainer';
 import { getUserDetails, updateUser } from '../actions/userActions';
 import { USER_UPDATE_RESET, USER_UPDATE_SUCCESS } from '../constants/userConstants';
 import store from "../store"
+import AdminScreen from './AdminScreen';
 
 function UserEditScreen() {
     const { id } = useParams(); 
@@ -45,7 +46,9 @@ function UserEditScreen() {
     }
 
     return (
+        
         <div>
+            <AdminScreen />
             <Link to='/admin/userlist'>
                 Powrót
             </Link>

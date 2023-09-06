@@ -21,3 +21,5 @@ def Category_list(request):
     Categories = Category.objects.all()
     serializer = CategorySerializer(Categories, many=True)
     return Response(serializer.data)
+
+

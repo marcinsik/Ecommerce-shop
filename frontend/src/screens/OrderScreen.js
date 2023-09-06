@@ -50,9 +50,9 @@ function OrderScreen() {
                   fontWeight: "1000",
                 }}
               >
-                Potwierdzenie złożenia zamówienia zostało wysłane na twój adres
+                Potwierdzenie złożenia zamówienia zostało wysłane na podany adres
                 e-mail: <span></span>
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+                <a href={`${order.user.email}`}>{order.user.email}</a>
               </p>
             </ListGroup.Item>
 

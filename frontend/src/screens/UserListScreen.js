@@ -14,6 +14,10 @@ function UserListScreen( ) {
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+
+
     const userList = useSelector(state => state.userList)
     const { loading, error, users } = userList
 
@@ -40,32 +44,41 @@ function UserListScreen( ) {
         }
     }
 
+
+    const filteredUsers = users
+  ? users.filter((user) => {
+      const idMatch = String(user._id).toLowerCase().includes(searchKeyword.toLowerCase());
+      const userMatch = user.name && String(user.name).toLowerCase().includes(searchKeyword.toLowerCase());
+      const emailMatch = user.email && String(user.email).toLowerCase().includes(searchKeyword.toLowerCase());
+      return idMatch || userMatch || emailMatch
+    })
+  : [];
+
 //PAGINATION
-const usersPerPage = 5;
-const [currentPage, setCurrentPage] = useState(1);
-const indexOfLastUser = currentPage * usersPerPage;
-const indexOfFirstUser = indexOfLastUser - usersPerPage;
-const currentUsers = users ? users.slice(indexOfFirstUser, indexOfLastUser) : [];
+    const usersPerPage = 5;
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-const totalPages = users ? Math.ceil(users.length / usersPerPage) : 0;
+    const totalPages = users ? Math.ceil(users.length / usersPerPage) : 0;
 
-const handlePageChange = (pageNumber) => {
-  setCurrentPage(pageNumber);
-};
+    const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    };
 
-const pagination = (
-  <Pagination>
-    {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-      <Pagination.Item
-        key={pageNumber}
-        active={pageNumber === currentPage}
-        onClick={() => handlePageChange(pageNumber)}
-      >
-        {pageNumber}
-      </Pagination.Item>
-    ))}
-  </Pagination>
-);
+    const pagination = (
+    <Pagination>
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+        <Pagination.Item
+            key={pageNumber}
+            active={pageNumber === currentPage}
+            onClick={() => handlePageChange(pageNumber)}
+        >
+            {pageNumber}
+        </Pagination.Item>
+        ))}
+    </Pagination>
+    );
 
 
     return (
@@ -73,11 +86,13 @@ const pagination = (
             <AdminScreen />
             <h1 className="admin-userlist-title">Lista użytkowników <Form className="admin-user-search">
             <Form.Control
-              type="search"
-              placeholder="Znajdź użytkownika"
-              className="admin-user-search-form"
-              aria-label="Search"
-            />
+                    type="search"
+                    placeholder="Znajdź użytkownika"
+                    className="admin-user-search-form"
+                    aria-label="Search"
+                    value={searchKeyword}
+                    onChange={(e) => setSearchKeyword(e.target.value)}
+                />
             <Button variant="dark">Wyszukaj</Button>
           </Form></h1>
             {loading
@@ -98,7 +113,7 @@ const pagination = (
                             </thead>
 
                             <tbody>
-                                {currentUsers.map(user => (
+                                {filteredUsers.map(user => (
                                     <tr key={user._id}>
                                         <td>{user._id}</td>
                                         <td>{user.name}</td>
@@ -109,16 +124,16 @@ const pagination = (
                                             <i className='fas fa-check' style={{ color: 'red' }}></i>
                                         )}</td>
 
-                                        <td>
-                                            <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className='fas fa-edit'></i>
-                                                </Button>
-                                            </LinkContainer>
-
-                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
-                                                <i className='fas fa-trash'></i>
+                                        <td style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                                            <Button variant='dark' className='btn-sm'>
+                                            <i className='fas fa-edit'></i>
                                             </Button>
+                                        </LinkContainer>
+
+                                        <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
+                                            <i className='fas fa-trash'></i>
+                                        </Button>
                                         </td>
                                     </tr>
                                 ))}

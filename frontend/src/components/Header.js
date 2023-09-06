@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Search from "./Search";
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -52,7 +53,9 @@ function Header() {
   };
 
   const location = useLocation()
-  const isUserListRoute = location.pathname.startsWith('/admin/userslist') || location.pathname === '/admin' || location.pathname === '/admin/productslist';
+  const isUserListRoute = location.pathname.startsWith('/admin/userslist') || 
+                        (location.pathname.startsWith('/admin') || location.pathname == '/admin/productslist' || location.pathname == '/admin/user/');
+
   if (isUserListRoute) {
     return null;
   }
@@ -60,7 +63,7 @@ function Header() {
 
   return (
     <header>
-      <Navbar bg="light" variant="light" expand="sm" collapseOnSelect>
+      <Navbar expand="sm" collapseOnSelect className="header-up">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand className="myshop">MyShop</Navbar.Brand>

@@ -58,6 +58,9 @@ h3{
 
 
 /* kategorie  header*/
+.header-up{
+  background: rgb(255, 255, 255);
+}
 .test {
 
   display: flex;
