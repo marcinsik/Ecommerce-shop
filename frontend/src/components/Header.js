@@ -9,7 +9,7 @@ import {
   Col,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,20 @@ import Search from "./Search";
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const navigate = useNavigate()
+
+  const handleSearch = () => {
+    navigate(`/search?query=${searchTerm}`)
+  }
+
+  //enter
+  function handleFormSubmit(event) {
+    event.preventDefault(); // Zapobiegamy domyślnej akcji przesyłania formularza
+    handleSearch(); // Wywołujemy funkcję do wyszukiwania
+  }
+
 
   const dispatch = useDispatch();
 
@@ -52,6 +66,7 @@ function Header() {
     return [];
   };
 
+
   const location = useLocation()
   const isUserListRoute = location.pathname.startsWith('/admin/userslist') || 
                         (location.pathname.startsWith('/admin') || location.pathname == '/admin/productslist' || location.pathname == '/admin/user/');
@@ -68,14 +83,15 @@ function Header() {
           <LinkContainer to="/">
             <Navbar.Brand className="myshop">MyShop</Navbar.Brand>
           </LinkContainer>
-          <Form className="my-form">
+          <Form className="my-form" onSubmit={handleFormSubmit}>
             <Form.Control
               type="search"
               placeholder="Czego szukasz?"
               className="search-form"
               aria-label="Search"
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Button variant="dark">Wyszukaj</Button>
+            <Button variant="dark" onClick = {handleSearch} >Wyszukaj</Button>
           </Form>
           <Navbar className="my-class">
             <Nav className="ms-auto">

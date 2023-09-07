@@ -7,5 +7,5 @@ urlpatterns = [
     path('categories/', views.Category_list, name='category_list'),
     
     
-    # Other URL patterns
+    
 ]

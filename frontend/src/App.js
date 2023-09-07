@@ -24,6 +24,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import AdminProductListScreen from './screens/AdminProductListScreen'
 import AdminProductEditScreen from './screens/AdminProductEditScreen'
 import AdminOrderListScreen from './screens/AdminOrderListScreen'
+import SearchResultScreen from './screens/SearchResultScreen'
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Route path='/admin/product/:id/edit' element={<AdminProductEditScreen />} />
 
             <Route path='/admin/orderlist' element={<AdminOrderListScreen/>} />
+            <Route path="/search" element={<SearchResultScreen/>} />
 
             <Route path="*" element={<NotFound />} />
             
