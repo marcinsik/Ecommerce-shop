@@ -5,7 +5,7 @@
 This is an ecommerce shop built using Django and React. It provides a platform for users to browse, purchase, and manage products.
 
 # Current features
-Users: Users can create accounts, change email or password, log in, and log out. 
+Users: Users can create accounts, create a review, change email or password, log in, and log out. 
 
 Order Management: Registered users can view their order history, including details of past purchases.
 
@@ -15,11 +15,10 @@ Shopping cart: Users can add products to their shopping cart, modify quantities,
 
 Checkout Process: Users can proceed to checkout, enter their shipping and payment details, and complete the purchase. The shop integrates with a payment gateway to process payments securely.
 
-# Future functions
 Product Catalog: The shop displays a catalog of products available for purchase. Users can browse products by category, search for specific products, and view individual product details.
 
-
 Admin Interface: An admin interface is provided for shop administrators to manage products, categories, and orders. Administrators can add, edit, and delete products, view and process orders, and perform other administrative tasks.
+
 # Installation
 1. Clone the repository:
 - git clone <repository-url>
