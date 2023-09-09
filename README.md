@@ -1,5 +1,5 @@
 # Ecommerce-shop
-![homepage](https://github.com/marcinsik/Ecommerce-shop/blob/7cbe96f8db0f4ae13e99aac1e0a71dd28b0e607c/homepage.png)
+![homepage](https://github.com/marcinsik/Ecommerce-shop/blob/b2952e8cdea49e5c4caedb67933d19e63e382330/homepage.png)
 
 
 This is an ecommerce shop built using Django and React. It provides a platform for users to browse, purchase, and manage products.
@@ -9,13 +9,11 @@ Users: Users can create accounts, create a review, change email or password, log
 
 Order Management: Registered users can view their order history, including details of past purchases.
 
-Simple Product Catalog: Users can view product details.
-
 Shopping cart: Users can add products to their shopping cart, modify quantities, and remove items. The shopping cart retains items even after the user logs out.
 
 Checkout Process: Users can proceed to checkout, enter their shipping and payment details, and complete the purchase. The shop integrates with a payment gateway to process payments securely.
 
-Product Catalog: The shop displays a catalog of products available for purchase. Users can browse products by category, search for specific products, and view individual product details.
+Product Catalog: The shop displays a catalog of products available for purchase. Users can browse products by category, search for specific products, filter by brand, price, and view individual product details.
 
 Admin Interface: An admin interface is provided for shop administrators to manage products, categories, and orders. Administrators can add, edit, and delete products, view and process orders, and perform other administrative tasks.
 
