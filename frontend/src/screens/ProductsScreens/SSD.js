@@ -21,21 +21,33 @@ function SSD() {
   const [filteredBrand, setFilteredBrand] = useState("Wszystkie");
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [priceFilter, setPriceFilter] = useState([0, 1000]); // [min, max]
+
 
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
 
   useEffect(() => {
-    if (filteredBrand === "Wszystkie") {
-      setFilteredProducts(products.filter((product) => product.subSubCategory === 1));
-    } else {
-      setFilteredProducts(products.filter((product) => product.brand === filteredBrand && product.subSubCategory === 1));
-    }
-  }, [filteredBrand, products]);
+    const filteredByBrand = filteredBrand === "Wszystkie"
+      ? products.filter(product => product.subSubCategory === 1)
+      : products.filter(product => product.brand === filteredBrand && product.subSubCategory === 1);
+
+    const filteredByPrice = filteredByBrand.filter(product => product.price >= priceFilter[0] && product.price <= priceFilter[1]);
+
+    setFilteredProducts(filteredByPrice);
+  }, [filteredBrand, products, priceFilter]);
 
   const handleBrandClick = (brand) => {
     setFilteredBrand(brand);
+  };
+
+  const handlePriceChange = (e, index) => {
+    const newPrices = [...priceFilter];
+    newPrices[index] = Number(e.target.value);
+    setPriceFilter(newPrices);
   };
 
 
@@ -71,6 +83,8 @@ function SSD() {
   }, []);
 
 
+
+
   return (
     <Row>
       <Col>
@@ -82,7 +96,7 @@ function SSD() {
             ) : error ? (
               <Message variant="danger">{error}</Message>
             ) : (
-              <ul>
+              <ul className="brandlist">
                 {brandNames.map((brandName) => (
                   <li
                     key={brandName}
@@ -94,12 +108,26 @@ function SSD() {
                 ))}
               </ul>
             )}
-            <h2>Zakres cenowy</h2>
-            <ul>
-              <li>TODO</li>
-              <li>TODO</li>
-              <li>TODO</li>
-            </ul>
+            <h2>Cena</h2>
+            <div>
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                value={priceFilter[0]}
+                onChange={e => handlePriceChange(e, 0)}
+              />
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                value={priceFilter[1]}
+                onChange={e => handlePriceChange(e, 1)}
+              />
+              <div>
+                Cena: {priceFilter[0]} - {priceFilter[1]}
+              </div>
+            </div>
           </div>
         </Card>
       </Col>

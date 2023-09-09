@@ -49,7 +49,7 @@ function UserEditScreen() {
         
         <div>
             <AdminScreen />
-            <Link to='/admin/userlist'>
+            <Link to='/admin/userslist'>
                 Powrót
             </Link>
 

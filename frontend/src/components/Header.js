@@ -68,8 +68,8 @@ function Header() {
 
 
   const location = useLocation()
-  const isUserListRoute = location.pathname.startsWith('/admin/userslist') || 
-                        (location.pathname.startsWith('/admin') || location.pathname == '/admin/productslist' || location.pathname == '/admin/user/');
+  const isUserListRoute = location.pathname.startsWith('/admin/userslist') ||
+    (location.pathname.startsWith('/admin') || location.pathname == '/admin/productslist' || location.pathname == '/admin/user/');
 
   if (isUserListRoute) {
     return null;
@@ -83,6 +83,14 @@ function Header() {
           <LinkContainer to="/">
             <Navbar.Brand className="myshop">MyShop</Navbar.Brand>
           </LinkContainer>
+          <Col className="logo" md="1" lg="2" sm="1">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+              className="img-fluid"
+              alt="Sample image"
+              style={{ marginLeft: "-20%", marginBottom: "10%"}}
+            />
+          </Col>
           <Form className="my-form" onSubmit={handleFormSubmit}>
             <Form.Control
               type="search"
@@ -91,7 +99,7 @@ function Header() {
               aria-label="Search"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Button variant="dark" onClick = {handleSearch} >Wyszukaj</Button>
+            <Button variant="dark" onClick={handleSearch} >Wyszukaj</Button>
           </Form>
           <Navbar className="my-class">
             <Nav className="ms-auto">
@@ -135,7 +143,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="test">
 
-            <NavDropdown title="Laptopy i Komputery">
+              <NavDropdown title="Laptopy i Komputery">
                 <NavDropdown title="Laptopy">
                   <LinkContainer to="/">
                     <NavDropdown.Item>Laptopy 17</NavDropdown.Item>
@@ -154,10 +162,10 @@ function Header() {
                   <LinkContainer to="/products/hdd">
                     <NavDropdown.Item>HDD</NavDropdown.Item>
                   </LinkContainer>
-                </NavDropdown>    
+                </NavDropdown>
                 <LinkContainer to="/products/graphic-cards">
-                    <Nav.Link>Karty graficzne</Nav.Link>
-                </LinkContainer>        
+                  <Nav.Link>Karty graficzne</Nav.Link>
+                </LinkContainer>
               </NavDropdown>
 
               <NavDropdown title="GAMING">

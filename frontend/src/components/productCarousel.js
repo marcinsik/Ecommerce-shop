@@ -8,7 +8,7 @@ import { listTopProducts } from '../actions/productActions'
 
 function ProductCarousel() {
     return (
-        <div style={{ display: 'block'}}>
+        <div style={{ display: 'block',  maxWidth: '100%', maxHeight: '300px', overflow: 'hidden' }}>
           <Carousel className='carousel'>
             <Carousel.Item interval={1500}>
               <img

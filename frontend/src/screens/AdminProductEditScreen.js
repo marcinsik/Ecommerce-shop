@@ -170,7 +170,7 @@ function AdminProductEditScreen() {
                                 <Form.Control
 
                                     type='name'
-                                    placeholder='Enter name'
+                                    placeholder='Nazwa'
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 >
@@ -182,7 +182,7 @@ function AdminProductEditScreen() {
                                 <Form.Control
 
                                     type='number'
-                                    placeholder='Enter price'
+                                    placeholder='Cena'
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                 >
@@ -195,7 +195,7 @@ function AdminProductEditScreen() {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter image'
+                                    placeholder='Zdjęcie'
                                     value={image}
                                     onChange={(e) => setImage(e.target.value)}
                                 >
@@ -211,7 +211,7 @@ function AdminProductEditScreen() {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter brand'
+                                    placeholder='Producent'
                                     value={brand}
                                     onChange={(e) => setBrand(e.target.value)}
                                 >
@@ -223,7 +223,7 @@ function AdminProductEditScreen() {
                                 <Form.Control
 
                                     type='number'
-                                    placeholder='Enter stock'
+                                    placeholder='Ilość'
                                     value={countInStock}
                                     onChange={(e) => setCountInStock(e.target.value)}
                                 >
