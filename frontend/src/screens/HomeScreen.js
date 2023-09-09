@@ -85,9 +85,9 @@ function HomeScreen() {
           </ul>
         </div>
 
-        <div class ="col" style={{marginLeft: '13%'}}>
+        <div class ="col" style={{marginLeft: '11%'}}>
           <div class="row">
-            <div class="col-9 col-sm-9 col-md-12">
+            <div class="col-9 col-sm-10 col-md-12">
             <p style={{ fontSize: '28px' }}>Kontakt</p>
             <span className="fa fa-phone" aria-hidden="true" style={{ marginBottom: '20px', fontSize: '14px'}}> 34 333 00 00</span>
             <span className="fa fa-envelope" aria-hidden="true" style={{marginBottom: '20px', fontSize: '14px' }}> myshop@myshop.com</span>
@@ -98,9 +98,9 @@ function HomeScreen() {
           </div>
         </div>
 
-        <div class ="col" style={{marginLeft: '13%'}}>
+        <div class ="col" style={{marginLeft: '11%'}}>
           <div class="row">
-            <div class="col-9 col-sm-9 col-md-12">
+            <div class="col-9 col-sm-10 col-md-12">
             <p style={{ fontSize: '28px' }}>Pomoc</p>
             <span className="fa fa-th-large" aria-hidden="true" style={{ marginBottom: '20px', fontSize: '14px'}}> Dostawa</span>
             <br></br>
