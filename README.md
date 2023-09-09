@@ -1,5 +1,5 @@
 # Ecommerce-shop
-![homepage](https://github.com/marcinsik/Ecommerce-shop/blob/7cbe96f8db0f4ae13e99aac1e0a71dd28b0e607c/homepage.png)
+![homepage](https://github.com/marcinsik/Ecommerce-shop/blob/b2952e8cdea49e5c4caedb67933d19e63e382330/homepage.png)
 
 
 This is an ecommerce shop built using Django and React. It provides a platform for users to browse, purchase, and manage products.
