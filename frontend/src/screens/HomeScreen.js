@@ -72,7 +72,7 @@ function HomeScreen() {
       }}>
       </div>
 
-      <div class="row g-5 mb-5">
+      <div class="row g-5 mb-5" style = {{marginLeft: '5%'}}>
         <div class="col-lg-4">
           <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">MyShop<span>.</span></a></div>
           <p class="mb-3">DLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
